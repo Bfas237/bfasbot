@@ -43,7 +43,7 @@ with open('wel', 'wb') as f:
  
 # Prepare the bot
 BOT = Client(
-    session_name = "user",
+    session_name = "install",
     api_id=API_ID,
   api_hash=API_HASH,
     app_version = "Bfasbot \U0001f525\U0001F916 v{}".format(__version__)
