@@ -33,8 +33,8 @@ def addtoDb(wel, user):
     cur = conn.execute('''SELECT Welcome, ChatID FROM Users WHERE ChatID = ?''', (user,))  
     users = cur.fetchone()
     count = 0 
-    cur.execute('''INSERT OR IGNORE INTO Users (Previous, ChatID) VALUES ( ?, ? )''', (users[0], user))
-    cur.execute('''UPDATE Users SET Previous = ? WHERE ChatID = ?''', (users[0], user))
+    cur.execute('''INSERT OR IGNORE INTO Users (Previous, ChatID) VALUES ( ?, ? )''', (users[0] if users is not None else "None", user))
+    cur.execute('''UPDATE Users SET Previous = ? WHERE ChatID = ?''', (users[0] if users is not None else "None", user))
     
     cur.execute('''INSERT OR IGNORE INTO Users (Welcome, ChatID) VALUES ( ?, ? )''', (wel, user))
     cur.execute('''UPDATE Users SET Welcome = ? WHERE ChatID = ?''', (wel, user))
@@ -60,12 +60,6 @@ def goafk(user, wel):
 
     print ("Total news written to database : ", count, users)     
     
-go = []    
-he = "#set Welcome %name to %title. This is not a playground for bots so why not join @PyrogramTesting for that? have fun and feel at home"
-he = he.split(" ")
-
-
-print(he)
 @BOT.on_message(Filters.me & Filters.command('set', cmds))
 def setwelcome(client, message):
     if sleeptime < time():
