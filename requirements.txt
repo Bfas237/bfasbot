@@ -1,0 +1,5 @@
+requests
+pyrogram
+tgcrypto
+python-dotenv
+speedtest-cli
