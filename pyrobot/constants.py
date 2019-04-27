@@ -1,15 +1,31 @@
 
+
 class First:
     ###
     #
     # 1start.py
     #
     ###
-    ALIVE = "`I'm Alive, Master :3`"
+    ALIVE = (
+        "╔═════\n"
+        "║ **\U0001F916 BOT STATUS:**  \U0001f525\n"
+        "╠═════\n"
+        "║**Library:**   `{}` \n"
+        "╠\n"
+        "║**System Info:**   `{}` \n"
+        "╠\n"
+        "║**Bot Version:**   `{}`\n"
+        "╠\n"
+        "║**Current Uptime:**   `{}`\n"
+        "╠\n"
+        "║**Github Repo:**   [{}]({})\n"
+        "╠═════\n"
+    )
 
     HELP_TEXT = (
         "[\u200b](https://git.colinshark.de/PyroBot/PyroBot/src/branch/master"
-        "/HELP.md)**Short Overview - PyroBot\U0001f525\U0001F916**\n"
+        "/HELP.md)\n"
+        "**Short Overview - PyroBot\U0001f525\U0001F916**\n"
         "This Userbot is made with [Pyrogram]"
         "(https://github.com/Pyrogram/Pyrogram).\n"
         "It runs on [Python 3.6](https://python.org) and above.\n\n"
@@ -36,6 +52,14 @@ class Admin:
         "[{}](tg://user?id={}) has been unbanned from \"[{}](t.me/c/{}/{})\""
     )
 
+    PROMOTED = "{} has been promoted to **Moderator.**"
+    PROMOTED_LOG = (
+        "[{}](tg://user?id={}) has been promoted to Moderator in \"[{}](t.me/c/{}/{})\""
+    )
+    UNPROMOTED = "{} has been Demoted back to **Normal user.**"
+    UNPROMOTED_LOG = (
+        "[{}](tg://user?id={}) has been Demoted back to Normal user in \"[{}](t.me/c/{}/{})\""
+    )
     MUTED = "{} has been muted."
     MUTED_TIME = "{} has been muted for {}."
     MUTED_LOG = (
@@ -61,6 +85,21 @@ class MiscStrings:
     ###
     UPTIME = "Current Uptime\n{}"
 
+class Comp:
+    
+    HELP = ("Oh, hey! Check out These from the community of Python developers: ❤️ A Compiled list of learning resources just for you:\n\n"
+            "• [As Beginner]{}\n"
+            "• [As Programmer]{}\n"
+            "• [Official Tutorial]{}\n"
+            "• [Dive into Python ]{}\n"
+            "• [Learn Python]{}"
+            "• [Computer Science Circles]{}\n"
+            "• [MIT OpenCourse]{}"
+            "• [Hitchhiker’s Guide to Python]{}\n"
+            "• The @PythonRes Telegram Channel\n"
+            "• Corey Schafer videos for [beginners]{} and in [general]{}\n"
+            "• [Project Python]{}\n"
+            "")
 
 class Eval:
     ###

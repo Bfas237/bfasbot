@@ -6,15 +6,25 @@
       "\\.pyc$"
     ],
     "install": {
-      "include": [
-        "^requirements\\.txt$"
-      ]
+    "include": [
+      "^package\\.json$",
+      "^requirements.txt$",
+      "^\\.env$"
+    ]
     },
+  "dependencies": {},
+  "engines": {
+    "node": "10.x"
+  },
     "restart": {
-      "include": [
-        "\\.py$",
-        "^start\\.sh"
-      ]
+    "exclude": [],
+    "include": [
+      "\\.js$",
+      "\\.coffee$",
+      "\\.json",
+      "\\.py",
+      "^start\\.sh"
+    ]
     },
     "throttle": 1000
   }

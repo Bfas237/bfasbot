@@ -74,8 +74,8 @@ def setwelcome(client, message):
         sleep(3)
         message.delete()
 
-
-@BOT.on_message(Filters.chat(["bfas237off", "bfas237group", "PyrogramLounge"]) & Filters.new_chat_members | Filters.command('show', cmds))
+  
+@BOT.on_message(Filters.new_chat_members | Filters.command('show', cmds))
 def welcome(client, message):
     
     welcomes = getuser(message.chat.id)
@@ -84,17 +84,21 @@ def welcome(client, message):
     if welcomes is not None: 
         if message.command:
             message.edit("**Welcome message for \"{}\"**\n\n✅ **Current**  - {}\n\n🗑 **Previous** - {}".format(message.chat.title, welcomes, old))
+            sleep(5)
+            message.delete()
             return
         new_members = ", ".join(
             ["[{}](tg://user?id={})".format(i.first_name, i.id) for i in message.new_chat_members])
 
-        text = welcomes.replace('%name', new_members).replace('%title', message.chat.title)
+        text = welcomes.replace('%name', new_members).replace('%title', "**"+message.chat.title+"**")
 
         # Send the welcome message
-        client.send_message(message.chat.id,
+        wel = client.send_message(message.chat.id,
                             text,
                             reply_to_message_id=message.message_id,
                             disable_web_page_preview=True)
-        
-    else:
-      message.reply("No welcome mesage has been set yet try setting one")
+        sleep(120)
+        wel.delete()
+    else: 
+        if message.command:
+          message.reply("No welcome mesage has been set yet try setting one")

@@ -60,7 +60,7 @@ def TimerString(message: Message):
     return "{} {}".format(secs.to_secs()[1], secs.to_secs()[2])
 
 def RestrictFailed(message: Message):
-    message.edit("I can't {} this user.".format(message.command[1]))
+    message.edit("I can't {} this user.".format(message.command[0]))
     sleep(2)
     message.delete()
 

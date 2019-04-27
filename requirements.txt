@@ -1,4 +1,4 @@
-requests
+requests_futures
 pyrogram
 tgcrypto
 python-dotenv

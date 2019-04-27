@@ -1,4 +1,13 @@
 # Custom ignores
+*.session
+*.db
+wel
+warn
+trigger
+welcome
+unknown_errors.txt
+correction
+
 
 
 # Byte-compiled / optimized / DLL files

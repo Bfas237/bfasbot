@@ -5,26 +5,29 @@ from datetime import datetime
 from pyrogram import Client
 import dotenv
 from pyrogram.errors import UserIsBlocked, FloodWait, FileIdInvalid, UsernameNotOccupied
-
+from pyrogram import __version__ as Version
 # We need logging this early for our Version Check
 logging.basicConfig(
     format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level = logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.WARN)
 LOGS = logging.getLogger(__name__)
-
+import re
+def ck(s):
+    return re.match(r"[-+]?\d+$", s) is not None
 # Check for Python 3.6 or newer
 if sys.version_info[0] < 3 or sys.version_info[1] < 5:
     LOGS.error("You MUST use at least Python 3.6. Bot Quitting")
     quit(1)
 
 # Now for the rest
-
-__version__ = '0.0.1'
-__author__  = 'Ningmua Bruno'
-__source__      = 'None'
+__version__ = '0.3.2'
+__author__  = 'Bfas237 Community'
+__source__      = 'http://github.com/bfas237'
 __copyright__   = 'Copyright (c) 2019 ' + __author__
 __copystring__  = "BfasBot v{} | {}".format(__version__, __copyright__)
+__python_version__ = "Python v{}".format(str(sys.version_info[0])+"."+str(sys.version_info[1]))
+__pyrogram__ = "Pyrogram v{}".format(Version)
 cmds = ["#","!","."]
 # Load our .env file
 dotenv.load_dotenv()
@@ -40,10 +43,12 @@ ACCGEN_API = os.environ.get("ACCGEN_API")
 import pickle
 with open('wel', 'wb') as f:
   pickle.dump({}, f)
- 
+with open('warn', 'wb') as f:
+   pickle.dump({}, f)
+                 
 # Prepare the bot
 BOT = Client(
-    session_name = "install",
+    session_name = "Bfschat",
     api_id=API_ID,
   api_hash=API_HASH,
     app_version = "Bfasbot \U0001f525\U0001F916 v{}".format(__version__)

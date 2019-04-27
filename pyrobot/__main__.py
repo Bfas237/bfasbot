@@ -1,11 +1,11 @@
-import sys
+import sys, pickle
 import importlib
 import time, datetime, os, re, sys, sqlite3, json, io 
-from pyrobot import __copystring__, __version__
+from pyrobot import __copystring__, __version__, __python_version__
 from pyrobot import BOT, LOGS
 from pyrobot.modules import ALL_MODULES
 import sqlite3 as lite
-
+ 
 from datetime import date, datetime
 for module_name in ALL_MODULES:
     imported_module = importlib.import_module("pyrobot.modules." + module_name)
@@ -14,7 +14,31 @@ def dict_factory(cursor, row):
     for idx, col in enumerate(cursor.description):
         d[col[0]] = row[idx]
     return d
+ 
 
+import pickle
+with open('trigger', 'wb') as f:
+    pickle.dump({}, f)
+with open('correction', 'wb') as f:
+    pickle.dump({}, f)
+with open('welcome', 'wb') as f:
+   pickle.dump({}, f)
+with open('warn', 'wb') as f:
+    pickle.dump({}, f)
+
+def delid(fid): 
+  with sqlite3.connect('userbot.db', check_same_thread=False) as conn:
+    c = conn.cursor()
+    c.execute("DELETE FROM Users WHERE COUNT_MSG= (?) AND UserID= (?)", (1, fid, ))
+    row = c.fetchone()
+    if row is None:
+      news = 0
+      valid = c.rowcount
+    else: 
+      news = row[3]
+      valid = c.rowcount
+    conn.commit()
+    return[news, valid]
 class DBHelper:
        def __init__(self, dbname="userbot.db"):
             self.dbname = dbname

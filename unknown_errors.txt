@@ -1,5 +1,0 @@
-403	MESSAGE_AUTHOR_REQUIRED	<class 'pyrogram.api.functions.messages.edit_message.EditMessage'>
-403	MESSAGE_AUTHOR_REQUIRED	<class 'pyrogram.api.functions.messages.edit_message.EditMessage'>
-403	MESSAGE_AUTHOR_REQUIRED	<class 'pyrogram.api.functions.messages.edit_message.EditMessage'>
-403	MESSAGE_AUTHOR_REQUIRED	<class 'pyrogram.api.functions.messages.edit_message.EditMessage'>
-403	MESSAGE_AUTHOR_REQUIRED	<class 'pyrogram.api.functions.messages.edit_message.EditMessage'>

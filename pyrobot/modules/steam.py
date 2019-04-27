@@ -6,8 +6,6 @@ from pyrobot import BOT, ACCGEN_API
 
 from ..constants import Steam
 from ..helpers import GetAccount
-
-
 @BOT.on_message(Filters.command("acc", "?") & Filters.me)
 def steam_accgen(bot: BOT, message: Message):
     if ACCGEN_API is None or "":
