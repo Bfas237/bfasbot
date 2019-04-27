@@ -22,8 +22,8 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 5:
 
 # Now for the rest
 __version__ = '0.3.2'
-__author__  = 'Bfas237 Community'
-__source__      = 'http://github.com/bfas237'
+__author__  = 'Bfasbot Ultra'
+__source__      = 'https://github.com/Bfas237/pyrobot'
 __copyright__   = 'Copyright (c) 2019 ' + __author__
 __copystring__  = "BfasBot v{} | {}".format(__version__, __copyright__)
 __python_version__ = "Python v{}".format(str(sys.version_info[0])+"."+str(sys.version_info[1]))

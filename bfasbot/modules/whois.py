@@ -1,8 +1,7 @@
 from time import sleep
 from pyrogram.api import functions
 from pyrogram import Filters, Message
-from pyrobot import BOT
-from pyrobot import cmds
+from bfasbot import BOT, cmds
 import shutil, os, shutil
 from ..constants import WhoIs
 from ..helpers import LastOnline, GetCommon

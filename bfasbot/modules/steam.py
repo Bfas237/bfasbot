@@ -2,7 +2,7 @@ import requests
 from time import sleep
 
 from pyrogram import Filters, Message
-from pyrobot import BOT, ACCGEN_API
+from bfasbot import BOT, ACCGEN_API
 
 from ..constants import Steam
 from ..helpers import GetAccount

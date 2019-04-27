@@ -1,4 +1,4 @@
-from pyrobot import BOT as app
+from bfasbot import BOT as app
 from pyrogram import Filters, Message
 
 prefixes = '.:!'

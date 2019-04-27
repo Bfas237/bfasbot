@@ -4,7 +4,7 @@ import requests
 from pyrogram import Filters
 from time import sleep, time
 import pickle
-from pyrobot import BOT, LOGS, cmds
+from bfasbot import BOT, LOGS, cmds
 BASE = "https://del.dog"
 text = "do some other stuff, send some more requests while this one works"
 from pprint import pprint

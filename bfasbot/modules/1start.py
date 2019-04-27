@@ -1,6 +1,6 @@
 
 from pyrogram import Filters, Message
-from pyrobot import (__pyrogram__, __author__, __version__, __python_version__, __source__, BOT, LOGS, START_TIME, cmds)
+from bfasbot import (__pyrogram__, __author__, __version__, __python_version__, __source__, BOT, LOGS, START_TIME, cmds)
 from datetime import datetime
 from ..constants import MiscStrings, First
 

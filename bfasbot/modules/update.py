@@ -1,5 +1,5 @@
 from pyrogram import Client, Filters
-from pyrobot import BOT, LOGS, cmds
+from bfasbot import BOT, LOGS, cmds
 from time import sleep, time
 from pyrogram.api import functions
 sleeptime = 0

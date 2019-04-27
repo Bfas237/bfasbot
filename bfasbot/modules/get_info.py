@@ -1,9 +1,8 @@
 from time import sleep
 from html import escape, unescape
 
-from pyrobot import cmds
 from pyrogram import Filters, Message
-from pyrobot import BOT
+from bfasbot import BOT, cmds
 from ..constants import GetInfo
 from ..helpers import LogMessage
 

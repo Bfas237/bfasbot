@@ -1,6 +1,6 @@
 import requests, re
 
-from pyrobot import BOT
+from bfasbot import BOT
 from pyrogram import Filters, Message
 
 from ..helpers import ReplyCheck

@@ -4,7 +4,7 @@ import speedtest
 from pyrogram import Filters, Message
 from pyrogram.api import functions
 
-from pyrobot import BOT
+from bfasbot import BOT
 
 from ..helpers import SpeedConvert, LogMessage
 from ..constants import www

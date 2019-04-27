@@ -1,6 +1,6 @@
 from time import sleep, time
 import pickle
-from pyrobot import BOT, LOGS, ck, cmds
+from bfasbot import BOT, LOGS, ck, cmds
 from pyrogram import Filters, Message
 from pyrogram.errors import UserAdminInvalid, ChatAdminRequired
 from datetime import datetime

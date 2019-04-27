@@ -1,7 +1,7 @@
 from time import sleep
 
 from pyrogram import Filters, Message
-from pyrobot import BOT
+from bfasbot import BOT
 
 from ..helpers import LogMessage, ReplyCheck
 

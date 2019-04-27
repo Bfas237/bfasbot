@@ -1,11 +1,9 @@
 from pyrogram import Filters, Message
 sleeptime = 0
-from pyrobot import (AFKREASON, COUNT_MSG, ISAFK, LOGGER, LOGGER_GROUP, USERS, HELPER)
+from bfasbot import (BOT, cmds, AFKREASON, COUNT_MSG, ISAFK, LOGGER, LOGGER_GROUP, USERS, HELPER)
 from pyrogram.api import functions
 import pickle, sqlite3
-from pyrobot import BOT
 from time import time, sleep
-from pyrobot import cmds
 
 
 def getuser(owner):

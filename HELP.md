@@ -2,13 +2,23 @@
 
 ## General Information
 
-This program is a Userbot for the [Telegram Messenger](https://telegram.org) based on [Pyrogram](https://github.com/pyrogram/pyrogram).
+This program is a Selfbot for the [Telegram Messenger](https://telegram.org) based on [Pyrogram](https://github.com/pyrogram/pyrogram). A normal bot can also be run but userbot is recommended. 
 
 ## Features
 
+- Execute codes
+- Welcome new users joing groups
+- Send Polls
+- Query a user or chat and return full info
+- Send memes
+- Query a chat and get admins and member stats
+- Change profile pic, first and last name
+- Paste long codes to dogbin
+
+
 ### First Commands (`1start.py`)
 
-* `.alive` - Tells you that the bot is running
+* `.alive` | `.up` - Tells you that the bot is running
 * `.help` - Gives out a link to this document
 
 ### Administration (`admin.py`)
@@ -20,6 +30,8 @@ These work only in reply to another user.
 * `?mute x` - Mutes a replied-to user for time `x`
 * `?unmute` - Unmutes a replied-to user
 * `?kick` - Kicks a replied-to user
+* `!mod` - Promote a user to moderator
+* `!unmod` - Demote a user to initial state
 
 Timed restrictions can be applied in the following scheme:
 
@@ -47,7 +59,7 @@ Get information about your administration and chat
 
 ### Miscellaneous (`misc.py`)
 
-* `.up` - Gives out the current uptime of the bot.
+* `.r` - Text replacement with a *Did you mean* Functionality
 
 ### Steam (`steam.py`)
 

@@ -6,7 +6,7 @@ import os
 from pyrogram import Message, User
 from pyrogram.api import functions
 
-from pyrobot import BOT, LOGGER, LOGGER_GROUP, ACCGEN_API
+from bfasbot import BOT, LOGGER, LOGGER_GROUP, ACCGEN_API
 
 from .interval import IntervalHelper
 

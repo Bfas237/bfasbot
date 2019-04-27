@@ -4,7 +4,7 @@ from time import sleep
 from pyrogram import Filters, Message
 from pyrogram.api import functions, types
 
-from pyrobot import BOT, LOGS
+from bfasbot import BOT, LOGS
 
 from ..constants import Eval
 from ..helpers import ReplyCheck, SendLong, LogMessage

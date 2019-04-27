@@ -1,5 +1,6 @@
 dependencies:
   heroku: 7.24.1
+  pnpm: 3.2.0
 packages:
   /@heroku-cli/color/1.1.14:
     dependencies:
@@ -385,7 +386,7 @@ packages:
       integrity: sha512-TR7T7MXLDoWCP+b2+Bd7BUz7GG4ICZBHRjATDl0GtrrsROCgr/lnLdfhNRKuFYWgYVuBrXTyDHD9k5vzXUNQaw==
   /@heroku/buildpack-registry/1.0.1:
     dependencies:
-      node-fetch: 2.3.0
+      node-fetch: 2.4.1
       true-myth: 2.2.8
     dev: false
     engines:
@@ -1966,12 +1967,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
-  /node-fetch/2.3.0:
+  /node-fetch/2.4.1:
     dev: false
     engines:
       node: 4.x || >=6.0.0
     resolution:
-      integrity: sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
+      integrity: sha512-P9UbpFK87NyqBZzUuDBDz4f6Yiys8xm8j7ACDbi6usvFm6KItklQUKjeoqTrYS/S1k6I8oaOC2YLLDr/gg26Mw==
   /node-forge/0.7.5:
     dev: false
     resolution:
@@ -2068,7 +2069,7 @@ packages:
       integrity: sha1-ttmec5n3jWXDuq/+8fsojpuFJDo=
   /original/1.0.2:
     dependencies:
-      url-parse: 1.4.6
+      url-parse: 1.4.7
     dev: false
     resolution:
       integrity: sha512-hyBVl6iqqUOJ8FqRe+l/gS8H+kKYjrEndd5Pm1MfBtsEKA038HkkdbAl/72EAXGyonD/PFsvmVG+EvcIpliMBg==
@@ -2193,6 +2194,13 @@ packages:
     dev: false
     resolution:
       integrity: sha1-V8zbeggh3yGDEhejytVOPhRqECU=
+  /pnpm/3.2.0:
+    dev: false
+    engines:
+      node: '>=8.15'
+    hasBin: true
+    resolution:
+      integrity: sha512-bujIqiZBgpusV0N/m+PNQ/FAUKc7ue9WqK+FqfN89on44iLEkERYGBWQEZt2a4OMWH4RHzme7muKOQY8ZegD3Q==
   /prepend-http/2.0.0:
     dev: false
     engines:
@@ -2738,13 +2746,13 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-FrXK/Afb42dsGxmZF3gj1lA6yww=
-  /url-parse/1.4.6:
+  /url-parse/1.4.7:
     dependencies:
       querystringify: 2.1.1
       requires-port: 1.0.0
     dev: false
     resolution:
-      integrity: sha512-/B8AD9iQ01seoXmXf9z/MjLZQIdOoYl/+gvsQF6+mpnxaTfG9P7srYaiqaDMyKkR36XMXfhqSHss5MyFAO8lew==
+      integrity: sha512-d3uaVyzDB9tQoSXFvuSUNFibTd9zxd2bkVrDRvF5TmvWWQwqE4lgYJ5m+x1DbecWkw+LK4RNl2CU1hHuOKPVlg==
   /url-to-options/1.0.1:
     dev: false
     engines:
@@ -2860,3 +2868,4 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   heroku: ^7.24.1
+  pnpm: ^3.2.0

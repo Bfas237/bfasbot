@@ -1,13 +1,15 @@
 # Custom ignores
+PyroBot
 *.session
 *.db
-wel
+correction
 warn
-trigger
+wel
 welcome
 unknown_errors.txt
-correction
-
+ren.py
+*.json
+trigger
 
 
 # Byte-compiled / optimized / DLL files

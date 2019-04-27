@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from pyrogram import Filters, Message
-from pyrobot import BOT, LOGS, START_TIME, cmds
+from bfasbot import BOT, LOGS, START_TIME, cmds
 
 from ..constants import MiscStrings, Comp
 

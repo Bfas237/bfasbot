@@ -1,14 +1,14 @@
 import sys, pickle
 import importlib
 import time, datetime, os, re, sys, sqlite3, json, io 
-from pyrobot import __copystring__, __version__, __python_version__
-from pyrobot import BOT, LOGS
-from pyrobot.modules import ALL_MODULES
+from bfasbot import __copystring__, __version__, __python_version__
+from bfasbot import BOT, LOGS
+from bfasbot.modules import ALL_MODULES
 import sqlite3 as lite
  
 from datetime import date, datetime
 for module_name in ALL_MODULES:
-    imported_module = importlib.import_module("pyrobot.modules." + module_name)
+    imported_module = importlib.import_module("bfasbot.modules." + module_name)
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
