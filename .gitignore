@@ -9,6 +9,7 @@ welcome
 unknown_errors.txt
 ren.py
 *.json
+.nano
 trigger
 
 
