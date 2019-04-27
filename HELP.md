@@ -1,4 +1,4 @@
-# PyroBot - A help page
+# BfasBot - A help page
 
 ## General Information
 
