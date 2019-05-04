@@ -1,0 +1,31 @@
+{
+  "install": "pip3 install --user -r requirements.txt",
+  "start": "PYTHONUNBUFFERED=true python3 -m bfasbot",
+  "watch": {
+    "ignore": [
+      "\\.pyc$"
+    ],
+    "install": {
+    "include": [
+      "^package\\.json$",
+      "^requirements.txt$",
+      "^\\.env$"
+    ]
+    },
+  "dependencies": {},
+  "engines": {
+    "node": "10.x"
+  },
+    "restart": {
+    "exclude": [],
+    "include": [
+      "\\.js$",
+      "\\.coffee$",
+      "\\.json",
+      "\\.py",
+      "^start\\.sh"
+    ]
+    },
+    "throttle": 1000
+  }
+}
