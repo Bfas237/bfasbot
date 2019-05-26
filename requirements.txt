@@ -1,8 +1,10 @@
 requests_futures
-pyrogram
+https://github.com/pyrogram/pyrogram/archive/asyncio.zip
 tgcrypto
-python-dotenv
-speedtest-cli 
-img2pdf
-inflect
+cfscrape
+bs4
+aiofiles
+async_timeout
+aiohttp
 timeago
+clint

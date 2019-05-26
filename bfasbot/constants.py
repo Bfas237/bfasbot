@@ -132,6 +132,9 @@ class MiscStrings:
     # misc.py
     #
     ###
+    ASK = ("**Have a Question?**\n\n"
+           "Don't ask to ask, just ask away :) You're more likely to get a response if you just ask the question, rather than asking if you can ask.")
+    
     PASTE = ("Please use one of these to paste your code then send the link here so we can check whats wrong.:\n\n"
     "➡️ del.dog\n"
     "➡️ hastebin.com")
@@ -263,46 +266,5 @@ class WhoIs:
         "════════════════\n"
     )
 
-class Steam:
-    ###
-    #
-    # steam.py
-    #
-    ###
-    ACC_MSG = (
-        "╔═════\n"
-        "║ **Steam Account**\n"
-        "╠═════\n"
-        "║ Login\n"
-        "║ `{login}`\n"
-        "╠═════\n"
-        "║ Password\n"
-        "║ `{password}`\n"
-        "╠═════\n"
-        "║ SteamID\n"
-        "║ `{steamid}`\n"
-        "╠═════\n"
-        "║ URL\n"
-        "║ steam.pm/{steamid}\n"
-        "╚═════"
-    )
 
-class www:
-    ###
-    #
-    # www.py
-    #
-    ###
-    SpeedTest = (
-        "Speedtest started at `{start}`\n\n"
-        "Ping:\n{ping} ms\n\n"
-        "Download:\n{download}\n\n"
-        "Upload:\n{upload}\n\n"
-        "ISP:\n__{isp}__"
-    )
-
-    NearestDC = (
-        "Country: `{}`\n"
-        "Nearest Datacenter: `{}`\n"
-        "This Datacenter: `{}`"
-    )
+    

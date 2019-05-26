@@ -1,8 +1,0 @@
-requests_futures
-pyrogram
-tgcrypto
-python-dotenv
-speedtest-cli 
-img2pdf
-inflect
-timeago

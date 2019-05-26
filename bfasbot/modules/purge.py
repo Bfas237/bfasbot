@@ -1,8 +1,9 @@
-from bfasbot import BOT as app
+from bfasbot import BOT, run_async
 from pyrogram import Filters, Message
 
 prefixes = '.:!'
-@app.on_message((Filters.me | Filters.channel) & Filters.command('del', prefixes))
+@BOT.on_message((Filters.me | Filters.channel) & Filters.command('del', prefixes))
+@run_async
 def purge_msgs(client, message):
 
     # if cmd has an int argument

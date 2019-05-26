@@ -1,13 +1,14 @@
 from time import sleep
 import os,subprocess,sys
 from pyrogram import Filters, Message, api
-from bfasbot import BOT, LOGS
+from bfasbot import BOT, LOGS, run_async
 
 from ..helpers import LogMessage, ReplyCheck
 
 
 
 @BOT.on_message(Filters.command(["ft"], ".") & Filters.me)
+@run_async
 def _ivess(bot: BOT, message: Message):
     if message.reply_to_message is not None: 
         reply_message = message.reply_to_message

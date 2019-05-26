@@ -3,7 +3,7 @@ from time import sleep
 
 from pyrogram import Filters, Message
 from pyrogram.api import functions, types
-
+from pyrogram.errors import FloodWait
 from bfasbot import BOT, LOGS
 
 from ..constants import Eval
@@ -11,6 +11,8 @@ from ..helpers import ReplyCheck, SendLong, LogMessage
 
 @BOT.on_message(Filters.command("eval", ".") & Filters.me)
 def evaluation(bot: BOT, message: Message):
+    m = message
+    c = bot
     try:
         cmdstr = " ".join(message.command[1:])
     except IndexError:
@@ -25,6 +27,15 @@ def evaluation(bot: BOT, message: Message):
         try:
             result = eval(cmdstr)
         except Exception as err:
+            expr.edit(Eval.ERROR.format(cmdstr, err))
+            LogMessage(Eval.ERROR_LOG.format(
+                    cmdstr,
+                    message.chat.title or message.chat.first_name,
+                    str(message.chat.id).replace("-100", ""),
+                    str(expr.message_id),
+                    err
+                ))
+        except AttributeError as err:
             expr.edit(Eval.ERROR.format(cmdstr, err))
             LogMessage(Eval.ERROR_LOG.format(
                     cmdstr,
@@ -50,6 +61,7 @@ def evaluation(bot: BOT, message: Message):
                 SendLong(expr, cmdstr, result)
 
             else:
+                
                 expr.edit(Eval.RESULT.format(cmdstr, result))
 
             LogMessage(Eval.RESULT_LOG.format(
@@ -57,9 +69,11 @@ def evaluation(bot: BOT, message: Message):
                 message.chat.title or message.chat.first_name,
                 str(message.chat.id).replace("-100", ""),
                 str(expr.message_id)))
- 
+
 @BOT.on_message(Filters.command("exec", ".") & Filters.me)
 def execution(bot: BOT, message: Message):
+    m = message
+    c = bot
     try:
         cmdstr = message.text[6:]
     except IndexError:
@@ -73,7 +87,7 @@ def execution(bot: BOT, message: Message):
 
         try:
             exec(
-                'def __ex(bot, message): '
+                'def __ex(c, m): '
                 + ''.join(
                     '\n '
                     + l for l in cmdstr.split('\n')))
@@ -103,3 +117,7 @@ def execution(bot: BOT, message: Message):
                     message.chat.title or message.chat.first_name,
                     str(message.chat.id).replace("-100", ""),
                     str(expr.message_id)))
+
+                
+
+

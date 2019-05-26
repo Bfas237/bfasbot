@@ -2,13 +2,18 @@ from time import sleep
 import os,subprocess,sys
 from pyrogram import Filters, Message, api
 from bfasbot import BOT, LOGS
-
+from pyrogram.errors import MessageIdInvalid, MediaInvalid
 from ..helpers import LogMessage, ReplyCheck
 
-
+  
 @BOT.on_message(Filters.command("poll", ".") & Filters.me)
 def make_poll(bot: BOT, message: Message):
     cmd = message.command
+    if message.chat.type == 'private':
+        message.edit("Polls are not supported in Private Chats.")
+        sleep(2)
+        message.delete()
+        return
     if len(cmd) is 1:
         message.edit("I need a question")
         sleep(2)

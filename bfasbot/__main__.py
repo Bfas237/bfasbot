@@ -5,17 +5,29 @@ from bfasbot import __copystring__, __version__, __python_version__
 from bfasbot import BOT, LOGS
 from bfasbot.modules import ALL_MODULES
 import sqlite3 as lite
-import glob
-
+import glob, asyncio
+from pyrogram import Filters, Client
 from datetime import date, datetime
 for module_name in ALL_MODULES:
     imported_module = importlib.import_module("bfasbot.modules." + module_name)
-def dict_factory(cursor, row):
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0]] = row[idx]
-    return d
- 
+
+
+from threading import Thread
+from queue import Queue
+
+
+def threaded(fn):
+  def wrap(queue, *args, **kwargs):
+    queue.put(fn(*args, **kwargs))
+
+  def call(*args, **kwargs):
+    queue = Queue()
+    job = Thread(target=wrap, args=(queue,) + args,
+                 kwargs=kwargs)
+    job.start()
+    return queue
+
+  return call
 
 def rem(file):
   # Get a list of all the file paths that ends with .txt from in specified directory
@@ -36,78 +48,21 @@ with open('welcome', 'wb') as f:
    pickle.dump({}, f)
 with open('warn', 'wb') as f:
     pickle.dump({}, f)
-
-def delid(fid): 
-  with sqlite3.connect('userbot.db', check_same_thread=False) as conn:
-    c = conn.cursor()
-    c.execute("DELETE FROM Users WHERE COUNT_MSG= (?) AND UserID= (?)", (1, fid, ))
-    row = c.fetchone()
-    if row is None:
-      news = 0
-      valid = c.rowcount
-    else: 
-      news = row[3]
-      valid = c.rowcount
-    conn.commit()
-    return[news, valid]
-class DBHelper:
-       def __init__(self, dbname="userbot.db"):
-            self.dbname = dbname
-            self.conn = sqlite3.connect(dbname, check_same_thread=False)
-            self.c = self.conn.cursor()
-            self.setup()
     
-       
-       def __enter__(self):
-       
-            return self
-       
-       def setup(self):
-            self.conn.text_factory = str
-            self.c.executescript('''CREATE TABLE IF NOT EXISTS Users
-    (
-    id INTEGER NOT NULL PRIMARY KEY UNIQUE, 
-    ChatID INTEGER, 
-    LastMsg INTEGER,
-    UserID TEXT,
-    Previous TEXT,
-    Welcome TEXT,
-    ISAFK INTEGER DEFAULT 1, 
-    COUNT_PM INTEGER,
-    AFKREASON TEXT DEFAULT "No Reason",
-    SPAM_CHAT_ID TEXT,
-    COUNT_MSG INTEGER);''' 
-    )
-            #self.c.executescript('''DROP TABLE IF EXISTS Users;''') 
-            self.conn.commit()
-       def __exit__(self, exc_class, exc, traceback):
-        
-            self.conn.commit()
-        
-            self.conn.close()
+    
+async def main():
+        await BOT.start()
+        print(__copystring__)
+        LOGS.info(f"Test it by typing .up in any chat.")
+        LOGS.info(f"Your bot is Version {__version__}\n")
+        await BOT.idle()
+        print("\nUserbot Stopped\n")
+        await BOT.stop()
 
-db = DBHelper()
-"""
-with sqlite3.connect('userbot.db', check_same_thread=False) as conn:
-    cur = conn.cursor()
-    cur = conn.execute('''SELECT ISAFK,COUNT_PM, AFKREASON, COUNT_MSG FROM Users''')  
-    row = cur.fetchone()
-    count = 0 
-    if row is None:
-        cur.execute('''INSERT INTO Users (ISAFK,COUNT_PM, AFKREASON, COUNT_MSG) VALUES ( ?, ?, ?, ? )''', (1, 0, "No Reason", 0 ))
-        count += 1 
-    conn.commit() 
 
-    print ("Total news written to database : ", count, row)  """
+
+
 
 
 if __name__ == "__main__":
-  if len(sys.argv) not in (1, 3, 4):
-    quit(1)
-  else:
-    BOT.start()
-    print(__copystring__)
-    LOGS.info("Your bot is running! Test it by typing .alive in any chat.")
-    LOGS.info("Your bot is Version {}\n".format(__version__))
-    
-  BOT.idle()
+    asyncio.get_event_loop().run_until_complete(main())

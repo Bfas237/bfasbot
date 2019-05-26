@@ -1,22 +1,28 @@
 
-import requests
-
+import requests, json
+import asyncio
+from bfasbot.mods import *
+import aiohttp
 from pyrogram import Filters
 from time import sleep, time
-import pickle
-from bfasbot import BOT, LOGS, cmds
+import pickle, os, traceback
+logger = logging
+from bfasbot import BOT, LOGS, cmds, run_async
 BASE = "https://del.dog"
 from pprint import pprint
 from requests_futures.sessions import FuturesSession
 cmd = ["haste", "bin", "dog"]
+from aiohttp import ClientSession
+
 
 
 def response_hook(resp, *args, **kwargs):
     # parse the json storing the result on the response object
     resp.data = resp.json()
 
+
 @BOT.on_message(Filters.command(cmd, cmds) & Filters.me)
-def haste(client, message):
+async def haste(client, message):
     reply = message.reply_to_message
     if reply:
         text = reply.text
@@ -26,12 +32,8 @@ def haste(client, message):
     if not text:
         return
     
-    with FuturesSession() as session:
-      session.hooks['response'] = response_hook
-      future = session.post("{}/documents".format(BASE), data=text.encode("UTF-8"))
-      response = future.result()  
-      code = '{0}'.format(response.status_code)
-      LINK = str(BASE) + "/" + code
-      message.edit("{}/{}".format(BASE, response.data["key"]))
-
-      
+    async with ClientSession() as session:
+      async with session.post('{}/documents'.format(BASE), data=text.encode('utf-8')) as post:
+        LINK = BASE + '/' + (await post.json())['key']
+        await message.reply("{}".format(LINK))
+      #await message.edit("{}/{}".format(BASE, response.data["key"]))

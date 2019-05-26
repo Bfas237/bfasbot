@@ -1,115 +1,42 @@
 import sys
-import os
+import os, sqlite3
 import logging, threading, signal 
 from datetime import datetime
-# We need logging this early for our Version Check
-logging.basicConfig(
-    format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level = logging.INFO)
+import logging, glob
+ 
 
+def exception_hook(exc_type, exc_value, exc_traceback):
+    logging.error(
+        "Uncaught exception",
+        exc_info=(exc_type, exc_value, exc_traceback)
+    )  
+ 
+sys.excepthook = exception_hook  
+
+from pathlib import Path
 from pyrogram import Client, Filters, MessageHandler
-from concurrent.futures import Future
-import asyncio
+from bfasbot.pyrawait import AwaitableClient
 
-class AwaitableFuture(Future):
-    def __await__(self):
-        return (yield from asyncio.wrap_future(self))
-
-class Conversation:
-    def __init__(self, client: Client, peer):
-        self.peer = peer
-        self.client = client
-        self.handlers = []
-        self.msgs = []
-        self.message_handler = MessageHandler(self.handle_message,Filters.chat(self.peer))
-        self.last_sent_id = 0
-    def handle_message(self, _, message):
-        if not self.check(message):
-            self.msgs.append(message)
-        message.stop_propagation()
-    def add_awaiter(self, filters):
-        fut = AwaitableFuture()
-        self.handlers.append((filters,fut))
-        return fut
-    def check(self,message):
-        for filters,fut in self.handlers:
-            if fut.cancelled():
-                self.handlers.remove((filters,fut))
-            elif filters(message):
-                self.handlers.remove((filters,fut))
-                fut.set_result(message)
-                return True
-        return False
-    def send_message(self,*args, **kwargs):
-        msg = self.client.send_message(self.peer, *args, **kwargs)
-        self.last_sent_id = msg.message_id
-        return msg
-    def get_response(self,filters=Filters.create('empty',lambda *_:True)):
-        for msg in self.msgs:
-            if msg.message_id < self.last_sent_id:
-                self.msgs.remove(msg)
-            elif filters(msg):
-                fut = AwaitableFuture()
-                fut.set_result(msg)
-                self.messages.remove()
-                return fut
-        return self.add_awaiter(filters)
-    async def __aenter__(self):
-        return self.__enter__()
-    def __enter__(self):
-        self.client.add_handler(self.message_handler, -1)
-        return self
-    async def __aexit__(self):
-        self.__exit__()
-    def __exit__(self, *args):
-        self.client.remove_handler(self.message_handler, -1)
-
-class AwaitableClient(Client):
-    def conversation(self, peer):
-        return Conversation(self, peer)
-import dotenv
-from pyrogram.errors import UserIsBlocked, FloodWait, FileIdInvalid, UsernameNotOccupied, MessageEmpty
+from pyrogram.errors import (UserIsBlocked, FloodWait, FileIdInvalid, BadRequest, Flood, InternalServerError, SeeOther, Unauthorized, UnknownError, MessageNotModified, UsernameNotOccupied, MessageEmpty, UserAdminInvalid, ChatAdminRequired, PeerIdInvalid)
 from pyrogram import __version__ as Version
-class ProgramKilled(Exception):
-    pass
-def signal_handler(signum, frame):
-    raise ProgramKilled
-    
-class Job(threading.Thread):
-    def __init__(self, interval, execute, *args, **kwargs):
-        threading.Thread.__init__(self)
-        self.daemon = False
-        self.stopped = threading.Event()
-        self.interval = interval
-        self.execute = execute
-        self.args = args
-        self.kwargs = kwargs
-        
-    def stop(self):
-                self.stopped.set()
-                self.join()
-    def run(self):
-            while not self.stopped.wait(self.interval.total_seconds()):
-                self.execute(*self.args, **self.kwargs)
-            
+import logging
+from logging.handlers import RotatingFileHandler
+from logging import handlers
+import sys
+# Import the duallog package to set up simultaneous logging to screen and console.
+import bfasbot.duallog
 
-signal.signal(signal.SIGTERM, signal_handler)
-signal.signal(signal.SIGINT, signal_handler)
-def run_async(func):
-	
-	from threading import Thread
-	from functools import wraps
 
-	@wraps(func)
-	def async_func(*args, **kwargs):
-		func_hl = Thread(target = func, args = args, kwargs = kwargs)
-		func_hl.start()
-		return func_hl
-
-	return async_func
-
+logging.debug('Silently Initializing.')
 logging.getLogger("pyrogram").setLevel(logging.WARN)
 LOGS = logging.getLogger(__name__)
+known_sessions_file = os.path.join(os.path.dirname(__file__), 'logtest')
+# Set up dual logging and tell duallog where to store the logfiles.
+duallog.setup(known_sessions_file)
+
+# Generate some log messages.
+ 
+
 import re
 def ck(s):
     return re.match(r"[-+]?\d+$", s) is not None
@@ -119,16 +46,15 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 5:
     quit(1)
 
 # Now for the rest
-__version__ = '0.4.1'
+__version__ = '0.5.0'
 __author__  = 'Bfasbot Ultra'
-__source__      = 'https://github.com/Bfas237/pyrobot'
+__source__      = 'https://github.com/Bfas237/bfasbot'
 __copyright__   = 'Copyright (c) 2019 ' + __author__
 __copystring__  = "BfasBot v{} | {}".format(__version__, __copyright__)
 __python_version__ = "Python v{}".format(str(sys.version_info[0])+"."+str(sys.version_info[1]))
 __pyrogram__ = "Pyrogram v{}".format(Version)
-cmds = ["#","!","."]
+cmds = ["#","!",".", "-"]
 # Load our .env file
-dotenv.load_dotenv()
 
 # Get the Values from our .env
 API_ID = os.environ.get("api_id")
@@ -147,6 +73,21 @@ def response_hook(resp, *args, **kwargs):
     # parse the json storing the result on the response object
     resp.data = resp.json()
 
+
+def run_async(func):
+	
+	from threading import Thread
+	from functools import wraps
+
+	@wraps(func)
+	def async_func(*args, **kwargs):
+		func_hl = Thread(target = func, args = args, kwargs = kwargs)
+		func_hl.start()
+		return func_hl
+
+	return async_func
+
+
 import pickle
 with open('wel', 'wb') as f:
   pickle.dump({}, f)
@@ -155,6 +96,24 @@ with open('warn', 'wb') as f:
 with open('plugins', 'wb') as f:
    pickle.dump({}, f)
                  
+PYRO_DB = str(Path(__file__).parent.parent / 'bfasbot.db')
+
+LOGS.warning("Checking Databased...")
+db = sqlite3.connect(PYRO_DB)
+c = db.cursor()
+#c.executescript('''DROP TABLE IF EXISTS blacklist;''')
+c.executescript(
+    "CREATE TABLE IF NOT EXISTS welcome "
+    "(chat_id INT UNIQUE ON CONFLICT FAIL, greet TEXT, chat_title TEXT);"
+    "CREATE TABLE IF NOT EXISTS blacklist "
+    "(chat_id INT, greet TEXT, chat_title TEXT);"
+    )
+db.commit()
+db.close()
+LOGS.warning("Check done.")
+
+
+    
 # Prepare the bot
 BOT = AwaitableClient(
     session_name = "Bfschat",
